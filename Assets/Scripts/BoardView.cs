@@ -14,12 +14,12 @@ public class BoardView : View {
 
     void Start () {
         // Grid
-		for (int row = 0; row < Rows; row += 1) {
+	for (int row = 0; row < Rows; row += 1) {
             for (int column = 0; column < Columns; column += 1) {
                 CreateBlock(new Cell(row, column), Grid);
             }
         }
-	}
+    }
 
     public void PutBlocks(List<Cell> blocks) {
         staticBlocks.AddRange(CreateBlocks(blocks, Block));
