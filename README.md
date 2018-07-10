@@ -1,1 +1,1 @@
-# Реализция игры "Тетрис" под Unity3D
+# Tetris game using Unity3D
