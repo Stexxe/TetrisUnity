@@ -11,10 +11,10 @@ public class ShapeView : View {
             blockList = CreateBlocks(blocks, Block);
             return;
         }
-
+        
         for (var i = 0; i < blockList.Count; i += 1) {
-            var go = blockList[i];
-            go.transform.position = GetObjectPos(blocks[i]);
+            var gmObj = blockList[i];
+            gmObj.transform.position = GetObjectPos(blocks[i]);
         }
     }
 }

@@ -13,21 +13,22 @@ public class ShapeController {
         this.view = view;
     }
 
-    public void ReceiveInput() {
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-            DoAction((Shape sh) => sh.Move(new Cell(0, -1)));
+    public void ReceiveInput()
+    {
+        if (Input.GetKeyDown(KeyCode.A)) {
+            DoAction(shp => shp.Move(new Cell(0, -1)));
         }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            DoAction((Shape sh) => sh.Move(new Cell(0, 1)));
+        
+        if (Input.GetKeyDown(KeyCode.D)) {
+            DoAction(shp => shp.Move(new Cell(0, 1)));
+        }
+       
+        if (Input.GetKeyDown(KeyCode.S)) {
+            DoAction(shp => shp.Drop());
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) {
-            DoAction((Shape sh) => sh.Rotate());
-        }
-
-        if (Input.GetKeyDown(KeyCode.DownArrow)) {
-            DoAction((Shape sh) => sh.Drop());
+            DoAction(shp => shp.Rotate());
         }
     }
 

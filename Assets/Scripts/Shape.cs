@@ -5,8 +5,8 @@ using UnityEngine;
 
 
 public class Shape {
-    private List<int[,]> molds;
-    private int moldIndex = 0;
+    private readonly List<int[,]> molds;
+    private int moldIndex;
 
     public bool Falling = false;
     public float Speed = 1;
@@ -24,26 +24,57 @@ public class Shape {
     }
 
     public bool Move(Cell delta) {
-        var targetPos = Pos + delta;
-        var targetCells = GetAffectedBlocks(targetPos);
-        var canMove = targetCells.TrueForAll(MovementRestrict);
+        var canMove = CanMove(delta);
 
         if (canMove) {
-            Pos = targetPos;
+            Pos = GetTargetPos(delta);
         }
 
         return canMove;
     }
 
+    private Cell GetTargetPos(Cell delta)
+    {
+        return Pos + delta;
+    }
+
+    private bool CanMove(Cell delta)
+    {
+        return GetAffectedBlocks(GetTargetPos(delta)).TrueForAll(MovementRestrict);
+    }
+
     public bool Rotate() {
-        var targetCells = GetAffectedBlocks(GetNextMoldIndex());
-        var canRotate = targetCells.TrueForAll(MovementRestrict);
+        var targetPos = FindValidRotationPos(GetNextMoldIndex());
+        var canRotate = targetPos != null;
 
         if (canRotate) {
             SwitchNextMold();
+            Pos = targetPos;
         }
 
         return canRotate;
+    }
+
+    private Cell FindValidRotationPos(int mIndex)
+    {
+        var deltas = new[]
+        {
+            new Cell(0, 0),
+            new Cell(0, 1),
+            new Cell(0, -1),
+            new Cell(1, 0),
+            new Cell(-1, 0)
+        };
+        
+        foreach (var delta in deltas)
+        {
+            if (GetAffectedBlocks(delta + Pos, mIndex).TrueForAll(MovementRestrict))
+            {
+                return delta + Pos;
+            }
+        }
+
+        return null;
     }
 
     public bool Drop() {
@@ -72,10 +103,6 @@ public class Shape {
         return GetAffectedBlocks(Pos, moldIndex);
     }
 
-    private List<Cell> GetAffectedBlocks(int moldIndex) {
-        return GetAffectedBlocks(null, moldIndex);
-    }
-
     private List<Cell> GetAffectedBlocks(Cell pos) {
         return GetAffectedBlocks(pos, -1);
     }
@@ -102,7 +129,7 @@ public class Shape {
         return result;
     }
 
-    public void SwitchNextMold() {
+    private void SwitchNextMold() {
         moldIndex = GetNextMoldIndex();
     }
 
@@ -110,7 +137,4 @@ public class Shape {
         return moldIndex + 1 < molds.Count ? moldIndex + 1 : 0;
     }
 
-    private int GetPreviousMoldIndex() {
-        return moldIndex - 1 >= 0 ? moldIndex - 1 : molds.Count - 1;
-    }
 }

@@ -117,14 +117,14 @@ public class GameManager : MonoBehaviour {
     }
 
     private Shape SpawnShape(float shapeSpeed) {
-        var shape = ShapeFactory.CreateRandom();
-        shape.Pos = new Cell(0, 5);
-        shape.Speed = shapeSpeed;
-        shape.MovementRestrict = board.IsEmptyCell;
-        shapeView.PlaceBlocks(shape.GetCurrentBlocks());
+        var shp = ShapeFactory.CreateRandom();
+        shp.Pos = new Cell(0, 5);
+        shp.Speed = shapeSpeed;
+        shp.MovementRestrict = board.IsEmptyCell;
+        shapeView.PlaceBlocks(shp.GetCurrentBlocks());
 
-        shapeController = new ShapeController(shape, shapeView);
+        shapeController = new ShapeController(shp, shapeView);
 
-        return shape;
+        return shp;
     }
 }
