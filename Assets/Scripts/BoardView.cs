@@ -12,10 +12,13 @@ public class BoardView : View {
 
     private List<GameObject> staticBlocks = new List<GameObject>();
 
-    void Start () {
+    void Start()
+    {
         // Grid
-	for (int row = 0; row < Rows; row += 1) {
-            for (int column = 0; column < Columns; column += 1) {
+        for (int row = 0; row < Rows; row += 1)
+        {
+            for (int column = 0; column < Columns; column += 1)
+            {
                 CreateBlock(new Cell(row, column), Grid);
             }
         }

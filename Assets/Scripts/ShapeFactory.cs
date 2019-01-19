@@ -2,8 +2,9 @@
 
 public static class ShapeFactory {
 
-    public static Shape CreateRandom() {
-        var choice = Random.Range(0, 4);
+    public static Shape CreateRandom()
+    {
+        var choice = Random.Range(0, 5);
 
         switch (choice) {
             case 0:
@@ -14,9 +15,11 @@ public static class ShapeFactory {
                 return CreateSquare();
             case 3:
                 return CreateL();
+            case 4:
+                return CreateS();
+            default:
+                return CreateSymmetric();
         }
-
-        return CreateSymmetric();
     }
 
     private static Shape CreateSymmetric() {
@@ -85,5 +88,22 @@ public static class ShapeFactory {
             { 1, 0, 0 },
             { 1, 1, 1 }
         });
+    }
+    
+    private static Shape CreateS()
+    {
+        return new Shape(
+            new[,]
+            {
+                {0, 1, 1},
+                {1, 1, 0}
+            },
+
+            new[,]
+            {
+                {1, 0},
+                {1, 1},
+                {0, 1}
+            });
     }
 }

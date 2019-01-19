@@ -8,7 +8,7 @@ public abstract class View : MonoBehaviour {
     private const float BLOCK_SIZE = 0.32f;
 
     protected List<GameObject> CreateBlocks(List<Cell> blocks, GameObject block) {
-        return blocks.Select((Cell c) => CreateBlock(c, block)).ToList();
+        return blocks.Select(c => CreateBlock(c, block)).ToList();
     }
 
     protected GameObject CreateBlock(Cell c, GameObject block) {

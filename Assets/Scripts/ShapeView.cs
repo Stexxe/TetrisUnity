@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShapeView : View {
-    public GameObject Block;
+public class ShapeView : View
+{
+    public GameObject block;
     private List<GameObject> blockList = new List<GameObject>();
-
-    public void PlaceBlocks(List<Cell> blocks) {
+    
+    public void PlaceBlocks(List<Cell> blocks)
+    {
         if (blockList.Count == 0) {
-            blockList = CreateBlocks(blocks, Block);
+            blockList = CreateBlocks(blocks, block);
             return;
         }
         
