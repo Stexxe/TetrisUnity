@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour {
             if (gameRunning) {
                 shapeController.ReceiveInput();
 
-                StartCoroutine(shapeController.Fall((bool stopped) => {
+                StartCoroutine(shapeController.Fall(stopped => {
                     if (stopped) {
                         board.PutBlocks(shape.GetCurrentBlocks());
                         boardView.PutBlocks(shape.GetCurrentBlocks());
